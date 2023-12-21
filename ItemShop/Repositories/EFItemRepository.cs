@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ItemShop.Repositories
 {
-    public class EFItemRepository
+    public class EFItemRepository : IEFItemRepository
     {
         private readonly DataContext _dataContext;
         public EFItemRepository(DataContext dataContext)
@@ -24,7 +24,7 @@ namespace ItemShop.Repositories
         {
             return await _dataContext.Items.AsNoTracking().FirstOrDefaultAsync(x => x.Id == Id);
         }
-        public async Task Delete (Item item)
+        public async Task Delete(Item item)
         {
             _dataContext.Remove(item);
             await _dataContext.SaveChangesAsync();
