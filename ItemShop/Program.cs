@@ -1,4 +1,5 @@
 using DbUp;
+using ItemShop.Clients;
 using ItemShop.Contexts;
 using ItemShop.Interfaces;
 using ItemShop.Middlewares;
@@ -23,6 +24,9 @@ builder.Services.AddDbContext<DataContext>(o => o.UseNpgsql(dbConnectionString))
 
 builder.Services.AddTransient<ItemService>();
 builder.Services.AddTransient<IEFItemRepository, EFItemRepository>();
+builder.Services.AddTransient<JsonPlaceholderClient>();
+
+builder.Services.AddHttpClient();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
