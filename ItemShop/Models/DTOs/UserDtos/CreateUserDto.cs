@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ItemShop.Models.DTOs
+namespace ItemShop.Models.DTOs.UserDtos
 {
     public class CreateUserDto
     {

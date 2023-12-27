@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using ItemShop.Exceptions;
 using ItemShop.Interfaces;
-using ItemShop.Models.DTOs;
+using ItemShop.Models.DTOs.ItemDtos;
 using ItemShop.Models.Entities;
-using ItemShop.Repositories;
 
 namespace ItemShop.Services
 {
@@ -18,13 +17,13 @@ namespace ItemShop.Services
             _efItemRepository = itemRepository;
             _mapper = mapper;
         }
-        public async Task CreateItem(CreateItemDto item)
+        public async Task Create(CreateItemDto item)
         {
             var entity = _mapper.Map<Item>(item);
             await _efItemRepository.Create(entity);
         }
 
-        public async Task DeleteItem(int id)
+        public async Task Delete(int id)
         {
             var item = await _efItemRepository.Get(id);
             if(item == null)
@@ -34,17 +33,13 @@ namespace ItemShop.Services
             await _efItemRepository.Delete(item);
         }
 
-        public async Task<List<Item>> GetAllItems()
+        public async Task<List<Item>> GetAll()
         {
-            List<Item> items = new List<Item>(await _efItemRepository.Get());
-            if(items.Count < 1)
-            {
-                throw new NoItemsFoundException();
-            }
+            List<Item> items = await _efItemRepository.Get();
             return items;
         }
 
-        public async Task<Item> GetItem(int id)
+        public async Task<Item> Get(int id)
         {
             var item = await _efItemRepository.Get(id);
             if (item == null)
@@ -54,7 +49,7 @@ namespace ItemShop.Services
             return item;
         }
 
-        public async Task UpdateItem(UpdateItemDto itemDto)
+        public async Task Update(UpdateItemDto itemDto)
         {
             var item = await _efItemRepository.Get(itemDto.Id);
             if (item == null)

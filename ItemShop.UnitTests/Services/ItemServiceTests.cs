@@ -3,10 +3,10 @@ using AutoFixture.Xunit2;
 using AutoMapper;
 using FluentAssertions;
 using ItemShop.Exceptions;
+using ItemShop.Interfaces;
 using ItemShop.Mappers;
-using ItemShop.Models.DTOs;
+using ItemShop.Models.DTOs.ItemDtos;
 using ItemShop.Models.Entities;
-using ItemShop.Repositories;
 using ItemShop.Services;
 using Moq;
 
@@ -17,18 +17,16 @@ namespace ItemShop.UnitTests.Services
         private readonly Mock<IEFItemRepository> _itemRepositoryMock;
         private readonly ItemService _itemService;
         private readonly IMapper _mapper;
-        private readonly Fixture _fixture;
 
         public ItemServiceTests()
         {
             _itemRepositoryMock = new Mock<IEFItemRepository>();
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<Automapper>();
+                cfg.AddProfile<MyAutomapperProfile>();
             });
             _mapper = configuration.CreateMapper();
             _itemService = new ItemService(_itemRepositoryMock.Object, _mapper);
-            _fixture = new Fixture();
         }
         [Theory]
         [AutoData]
@@ -41,7 +39,7 @@ namespace ItemShop.UnitTests.Services
             });
 
             //Act
-            var result = await _itemService.GetItem(id);
+            var result = await _itemService.Get(id);
 
             //Assert
             result.Id.Should().Be(id);
@@ -56,7 +54,7 @@ namespace ItemShop.UnitTests.Services
             _itemRepositoryMock.Setup(m => m.Get(id)).Returns(Task.FromResult<Item>(null));
 
             //Act and Assert
-            await _itemService.Invoking(async x => await x.GetItem(id)).Should().ThrowAsync<ItemNotFoundException>();
+            await _itemService.Invoking(async x => await x.Get(id)).Should().ThrowAsync<ItemNotFoundException>();
 
         }
 
@@ -69,7 +67,7 @@ namespace ItemShop.UnitTests.Services
             _itemRepositoryMock.Setup(m => m.Get()).Returns(Task.FromResult(expectedItems));
 
             //Act
-            var result = await _itemService.GetAllItems();
+            var result = await _itemService.GetAll();
 
             //Assert
             result.Should().BeEquivalentTo(expectedItems);
@@ -83,7 +81,7 @@ namespace ItemShop.UnitTests.Services
             _itemRepositoryMock.Setup(m => m.Get()).Returns(Task.FromResult(new List<Item>()));
 
             //Act and Assert
-            await _itemService.Invoking(async x => await x.GetAllItems()).Should().ThrowAsync<NoItemsFoundException>();
+            await _itemService.Invoking(async x => await x.GetAll()).Should().ThrowAsync<NoItemsFoundException>();
         }
 
         [Theory]
@@ -92,7 +90,7 @@ namespace ItemShop.UnitTests.Services
         {
             //Arrange
 
-            await _itemService.CreateItem(createItemDto);
+            await _itemService.Create(createItemDto);
             //Act and Assert
             _itemRepositoryMock.Verify(m => m.Create(It.Is<Item>(item => item.Name == createItemDto.Name && item.Price == createItemDto.Price)), Times.Once());
 
@@ -106,7 +104,7 @@ namespace ItemShop.UnitTests.Services
             _itemRepositoryMock.Setup(m => m.Get(itemId)).Returns(Task.FromResult(existingItem));
 
             //Act
-            await _itemService.DeleteItem(itemId);
+            await _itemService.Delete(itemId);
 
             //Assert
             _itemRepositoryMock.Verify(m => m.Get(itemId), Times.Once());
@@ -121,7 +119,7 @@ namespace ItemShop.UnitTests.Services
             _itemRepositoryMock.Setup(m => m.Get(id)).Returns(Task.FromResult<Item>(null));
 
             //Act and Assert
-            await _itemService.Invoking(async x => await x.DeleteItem(id)).Should().ThrowAsync<ItemNotFoundException>();
+            await _itemService.Invoking(async x => await x.Delete(id)).Should().ThrowAsync<ItemNotFoundException>();
 
             _itemRepositoryMock.Verify(m => m.Get(id), Times.Once());
             _itemRepositoryMock.Verify(m => m.Delete(It.IsAny<Item>()), Times.Never());
@@ -137,7 +135,7 @@ namespace ItemShop.UnitTests.Services
             _itemRepositoryMock.Setup(m => m.Get(updateItemDto.Id)).Returns(Task.FromResult(existingItem));
 
             //Act
-            await _itemService.UpdateItem(updateItemDto);
+            await _itemService.Update(updateItemDto);
             //Assert
             _itemRepositoryMock.Verify(m => m.Get(updateItemDto.Id), Times.Once());
             _itemRepositoryMock.Verify(m => m.Update(It.IsAny<Item>()), Times.Once());
@@ -152,7 +150,7 @@ namespace ItemShop.UnitTests.Services
             var updateItemDto = new UpdateItemDto { Id = id };
 
             //Act and Assert
-            await _itemService.Invoking(async x => await x.UpdateItem(updateItemDto)).Should().ThrowAsync<ItemNotFoundException>();
+            await _itemService.Invoking(async x => await x.Update(updateItemDto)).Should().ThrowAsync<ItemNotFoundException>();
 
             _itemRepositoryMock.Verify(m => m.Get(id), Times.Once());
             _itemRepositoryMock.Verify(m => m.Update(It.IsAny<Item>()), Times.Never());

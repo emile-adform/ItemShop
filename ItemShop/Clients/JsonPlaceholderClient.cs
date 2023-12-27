@@ -1,4 +1,4 @@
-﻿using ItemShop.Models.DTOs;
+﻿using ItemShop.Models.DTOs.UserDtos;
 using Newtonsoft.Json;
 using System.Text;
 

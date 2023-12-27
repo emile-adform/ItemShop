@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using ItemShop.Models.DTOs;
+using ItemShop.Models.DTOs.ItemDtos;
 using ItemShop.Models.Entities;
 
 namespace ItemShop.Mappers
 {
-    public class Automapper : Profile
+    public class MyAutomapperProfile : Profile
     {
-        public Automapper()
+        public MyAutomapperProfile()
         {
             CreateMap<CreateItemDto, Item>().ReverseMap();
             CreateMap<UpdateItemDto, Item>().ReverseMap();

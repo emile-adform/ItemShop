@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ItemShop.Models.DTOs
+namespace ItemShop.Models.DTOs.UserDtos
 {
     public class UserDto
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Username { get; set; }
         [EmailAddress(ErrorMessage = "Invalid email format")]

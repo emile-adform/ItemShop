@@ -1,4 +1,4 @@
-﻿namespace ItemShop.Models.DTOs
+﻿namespace ItemShop.Models.DTOs.ItemDtos
 {
     public class UpdateItemDto
     {

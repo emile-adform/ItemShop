@@ -1,6 +1,6 @@
 ﻿using ItemShop.Models.Entities;
 
-namespace ItemShop.Repositories
+namespace ItemShop.Interfaces
 {
     public interface IEFItemRepository
     {

@@ -1,4 +1,5 @@
 ﻿using ItemShop.Contexts;
+using ItemShop.Interfaces;
 using ItemShop.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 

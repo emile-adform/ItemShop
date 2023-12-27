@@ -1,5 +1,5 @@
 ﻿using ItemShop.Clients;
-using ItemShop.Models.DTOs;
+using ItemShop.Models.DTOs.UserDtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ItemShop.Controllers
