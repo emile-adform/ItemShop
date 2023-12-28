@@ -3,14 +3,8 @@ using FluentAssertions;
 using ItemShop.Clients;
 using ItemShop.Exceptions;
 using ItemShop.Models.DTOs.UserDtos;
-using ItemShop.Models.Entities;
 using ItemShop.Services;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ItemShop.UnitTests.Services
 {
@@ -42,7 +36,7 @@ namespace ItemShop.UnitTests.Services
 
         [Theory]
         [AutoData]
-        public async Task GetById_InValidId_ThrowsUserNotFoundException(int id, string name)
+        public async Task GetById_InValidId_ThrowsUserNotFoundException(int id)
         {
             var expectedResult = new JsonPlaceholderResult<UserDto>
             {
