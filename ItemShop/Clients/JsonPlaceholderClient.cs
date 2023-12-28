@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ItemShop.Clients
 {
-    public class JsonPlaceholderClient
+    public class JsonPlaceholderClient : IJsonPlaceholderClient
     {
         private HttpClient _httpClient;
         public JsonPlaceholderClient(HttpClient httpClient)

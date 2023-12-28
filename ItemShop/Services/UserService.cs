@@ -6,8 +6,8 @@ namespace ItemShop.Services
 {
     public class UserService
     {
-        private readonly JsonPlaceholderClient _client;
-        public UserService(JsonPlaceholderClient client)
+        private readonly IJsonPlaceholderClient _client;
+        public UserService(IJsonPlaceholderClient client)
         {
             _client = client;
         }
