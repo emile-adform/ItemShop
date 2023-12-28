@@ -1,5 +1,6 @@
 ﻿using ItemShop.Clients;
 using ItemShop.Models.DTOs.UserDtos;
+using ItemShop.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ItemShop.Controllers
@@ -9,25 +10,27 @@ namespace ItemShop.Controllers
     public class UserController : ControllerBase
     {
         private readonly JsonPlaceholderClient _client;
+        private readonly UserService _userService;
 
-        public UserController(JsonPlaceholderClient client)
+        public UserController(UserService userService)
         {
-            _client = client;
+            _userService = userService;
         }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _client.GetUsers());
+            return Ok(await _userService.GetUsers());
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(await _client.GetUserById(id));
+            return Ok(await _userService.GetById(id));
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]CreateUserDto user)
         {
-            return Ok(await _client.CreateUser(user));
+            await _userService.CreateUser(user);
+            return Ok();
         }
 
     }

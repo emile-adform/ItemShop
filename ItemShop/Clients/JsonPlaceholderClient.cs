@@ -14,14 +14,30 @@ namespace ItemShop.Clients
         public async Task<List<UserDto>> GetUsers()
         {
             var response = await _httpClient.GetAsync("https://jsonplaceholder.typicode.com/users");
-            var users = await response.Content.ReadAsAsync<List<UserDto>>();
+            return await response.Content.ReadAsAsync<List<UserDto>>();
 
-            return users;
         }
-        public async Task<UserDto> GetUserById(int userId)
+        public async Task<JsonPlaceholderResult<UserDto>> GetUserAsync(int userId)
         {
             var response = await _httpClient.GetAsync($"https://jsonplaceholder.typicode.com/users/{userId}");
-            return await response.Content.ReadAsAsync<UserDto>();
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsAsync<UserDto>();
+                return new JsonPlaceholderResult<UserDto>
+                {
+                    Data = data,
+                    IsSuccessful = true,
+                    ErrorMessage = null
+                };
+            }
+            else
+            {
+                return new JsonPlaceholderResult<UserDto>
+                {
+                    IsSuccessful = false,
+                    ErrorMessage = response.StatusCode.ToString()
+                };
+            }
         }
         public async Task<UserDto> CreateUser(CreateUserDto user)
         {

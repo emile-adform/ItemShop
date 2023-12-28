@@ -25,6 +25,7 @@ builder.Services.AddDbContext<DataContext>(o => o.UseNpgsql(dbConnectionString))
 builder.Services.AddTransient<ItemService>();
 builder.Services.AddTransient<IEFItemRepository, EFItemRepository>();
 builder.Services.AddTransient<JsonPlaceholderClient>();
+builder.Services.AddTransient<UserService>();
 
 builder.Services.AddHttpClient();
 
