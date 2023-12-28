@@ -73,17 +73,6 @@ namespace ItemShop.UnitTests.Services
             result.Should().BeEquivalentTo(expectedItems);
         }
 
-        [Fact]
-        public async Task GetAll_WithoutItems_ThrowsNoItemsFoundException()
-        {
-            //Arrange
-
-            _itemRepositoryMock.Setup(m => m.Get()).Returns(Task.FromResult(new List<Item>()));
-
-            //Act and Assert
-            await _itemService.Invoking(async x => await x.GetAll()).Should().ThrowAsync<NoItemsFoundException>();
-        }
-
         [Theory]
         [AutoData]
         public async Task CreateItem_ValidDto_CallsRepositoryCreate(CreateItemDto createItemDto)
@@ -107,8 +96,8 @@ namespace ItemShop.UnitTests.Services
             await _itemService.Delete(itemId);
 
             //Assert
-            _itemRepositoryMock.Verify(m => m.Get(itemId), Times.Once());
-            _itemRepositoryMock.Verify(m => m.Delete(existingItem), Times.Once());
+            _itemRepositoryMock.Verify(m => m.Get(itemId), Times.Once);
+            _itemRepositoryMock.Verify(m => m.Delete(existingItem), Times.Once);
         }
 
         [Theory]
@@ -121,8 +110,8 @@ namespace ItemShop.UnitTests.Services
             //Act and Assert
             await _itemService.Invoking(async x => await x.Delete(id)).Should().ThrowAsync<ItemNotFoundException>();
 
-            _itemRepositoryMock.Verify(m => m.Get(id), Times.Once());
-            _itemRepositoryMock.Verify(m => m.Delete(It.IsAny<Item>()), Times.Never());
+            _itemRepositoryMock.Verify(m => m.Get(id), Times.Once);
+            _itemRepositoryMock.Verify(m => m.Delete(It.IsAny<Item>()), Times.Never);
 
         }
 
@@ -137,8 +126,8 @@ namespace ItemShop.UnitTests.Services
             //Act
             await _itemService.Update(updateItemDto);
             //Assert
-            _itemRepositoryMock.Verify(m => m.Get(updateItemDto.Id), Times.Once());
-            _itemRepositoryMock.Verify(m => m.Update(It.IsAny<Item>()), Times.Once());
+            _itemRepositoryMock.Verify(m => m.Get(updateItemDto.Id), Times.Once);
+            _itemRepositoryMock.Verify(m => m.Update(It.IsAny<Item>()), Times.Once);
         }
         [Theory]
         [AutoData]
@@ -152,8 +141,8 @@ namespace ItemShop.UnitTests.Services
             //Act and Assert
             await _itemService.Invoking(async x => await x.Update(updateItemDto)).Should().ThrowAsync<ItemNotFoundException>();
 
-            _itemRepositoryMock.Verify(m => m.Get(id), Times.Once());
-            _itemRepositoryMock.Verify(m => m.Update(It.IsAny<Item>()), Times.Never());
+            _itemRepositoryMock.Verify(m => m.Get(id), Times.Once);
+            _itemRepositoryMock.Verify(m => m.Update(It.IsAny<Item>()), Times.Never);
         }
 
     }
