@@ -23,7 +23,7 @@ string dbConnectionString = builder.Configuration.GetConnectionString("PostgreCo
 builder.Services.AddDbContext<DataContext>(o => o.UseNpgsql(dbConnectionString));
 
 builder.Services.AddTransient<ItemService>();
-builder.Services.AddTransient<IEFItemRepository, EFItemRepository>();
+builder.Services.AddTransient<IItemRepository, ItemRepository>();
 builder.Services.AddTransient<IJsonPlaceholderClient, JsonPlaceholderClient>();
 builder.Services.AddTransient<UserService>();
 

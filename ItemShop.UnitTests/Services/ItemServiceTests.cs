@@ -14,13 +14,13 @@ namespace ItemShop.UnitTests.Services
 {
     public class ItemServiceTests
     {
-        private readonly Mock<IEFItemRepository> _itemRepositoryMock;
+        private readonly Mock<IItemRepository> _itemRepositoryMock;
         private readonly ItemService _itemService;
         private readonly IMapper _mapper;
 
         public ItemServiceTests()
         {
-            _itemRepositoryMock = new Mock<IEFItemRepository>();
+            _itemRepositoryMock = new Mock<IItemRepository>();
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<MyAutomapperProfile>();

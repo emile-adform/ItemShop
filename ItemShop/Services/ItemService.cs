@@ -9,10 +9,10 @@ namespace ItemShop.Services
     public class ItemService
     {
 
-        private readonly IEFItemRepository _efItemRepository;
+        private readonly IItemRepository _efItemRepository;
         private readonly IMapper _mapper;
 
-        public ItemService(IEFItemRepository itemRepository, IMapper mapper)
+        public ItemService(IItemRepository itemRepository, IMapper mapper)
         {
             _efItemRepository = itemRepository;
             _mapper = mapper;

@@ -2,7 +2,7 @@
 
 namespace ItemShop.Interfaces
 {
-    public interface IEFItemRepository
+    public interface IItemRepository
     {
         Task Create(Item item);
         Task Delete(Item item);

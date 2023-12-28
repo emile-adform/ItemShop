@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ItemShop.Repositories
 {
-    public class EFItemRepository : IEFItemRepository
+    public class ItemRepository : IItemRepository
     {
         private readonly DataContext _dataContext;
-        public EFItemRepository(DataContext dataContext)
+        public ItemRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
