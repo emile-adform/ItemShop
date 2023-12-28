@@ -27,8 +27,8 @@ namespace ItemShop.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]CreateUserDto user)
         {
-            await _userService.CreateUser(user);
-            return Ok();
+            var createdUser = await _userService.CreateUser(user);
+            return CreatedAtAction("Get", new {userId = createdUser.Id}, createdUser);
         }
 
     }

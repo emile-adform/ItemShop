@@ -11,11 +11,27 @@ namespace ItemShop.Clients
         {
             _httpClient = httpClient;
         }
-        public async Task<List<UserDto>> GetUsers()
+        public async Task<JsonPlaceholderResult<List<UserDto>>> GetUsersAsync()
         {
             var response = await _httpClient.GetAsync("https://jsonplaceholder.typicode.com/users");
-            return await response.Content.ReadAsAsync<List<UserDto>>();
-
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsAsync<List<UserDto>>();
+                return new JsonPlaceholderResult<List<UserDto>>
+                {
+                    Data = data,
+                    IsSuccessful = true,
+                    ErrorMessage = null
+                };
+            }
+            else
+            {
+                return new JsonPlaceholderResult<List<UserDto>>
+                {
+                    IsSuccessful = false,
+                    ErrorMessage = response.StatusCode.ToString()
+                };
+            }
         }
         public async Task<JsonPlaceholderResult<UserDto>> GetUserAsync(int userId)
         {
@@ -39,12 +55,30 @@ namespace ItemShop.Clients
                 };
             }
         }
-        public async Task<UserDto> CreateUser(CreateUserDto user)
+        public async Task<JsonPlaceholderResult<UserDto>> CreateUserAsync(CreateUserDto user)
         {
             var jsonContent = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("https://jsonplaceholder.typicode.com/users", jsonContent);
-            var createdUser = await response.Content.ReadAsAsync<UserDto>();
-            return createdUser;
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadAsAsync<UserDto>();
+                return new JsonPlaceholderResult<UserDto>
+                {
+                    Data = data,
+                    IsSuccessful = true,
+                    ErrorMessage = null
+                };
+            }
+            else
+            {
+                return new JsonPlaceholderResult<UserDto>
+                {
+                    IsSuccessful = false,
+                    ErrorMessage = response.StatusCode.ToString()
+                };
+            }
+            //var createdUser = await response.Content.ReadAsAsync<UserDto>();
+            //return createdUser;
 
         }
 

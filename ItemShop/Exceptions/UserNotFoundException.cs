@@ -2,6 +2,6 @@
 {
     public class UserNotFoundException : Exception
     {
-        public UserNotFoundException() : base("Item not found") { }
+        public UserNotFoundException() : base("User not found") { }
     }
 }

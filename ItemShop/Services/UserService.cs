@@ -22,11 +22,21 @@ namespace ItemShop.Services
         }
         public async Task<List<UserDto>> GetUsers()
         {
-            return await _client.GetUsers();
+            var result = await _client.GetUsersAsync();
+            if(!result.IsSuccessful)
+            {
+                throw new Exception();
+            }
+            return result.Data;
         }
-        public async Task CreateUser(CreateUserDto user)
+        public async Task<UserDto> CreateUser(CreateUserDto user)
         {
-            await _client.CreateUser(user);
+            var result = await _client.CreateUserAsync(user);
+            if (!result.IsSuccessful)
+            {
+                throw new Exception();
+            }
+            return result.Data;
         }
     }
 }
