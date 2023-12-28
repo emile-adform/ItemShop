@@ -1,13 +1,9 @@
 ﻿using ItemShop.Exceptions;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ItemShop.Middlewares
 {
-    // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class ErrorHandlingMiddleware
     {
         private readonly RequestDelegate _next;
@@ -37,6 +33,9 @@ namespace ItemShop.Middlewares
                     case NoItemsFoundException e:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
+                    case UserNotFoundException e:
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
@@ -46,13 +45,4 @@ namespace ItemShop.Middlewares
             }
         }
     }
-
-    //// Extension method used to add the middleware to the HTTP request pipeline.
-    //public static class ErrorHandlingMiddlewareExtensions
-    //{
-    //    public static IApplicationBuilder UseErrorHandlingMiddleware(this IApplicationBuilder builder)
-    //    {
-    //        return builder.UseMiddleware<ErrorHandlingMiddleware>();
-    //    }
-    //}
 }

@@ -1,4 +1,5 @@
 ﻿using ItemShop.Clients;
+using ItemShop.Exceptions;
 using ItemShop.Models.DTOs.UserDtos;
 
 namespace ItemShop.Services
@@ -15,7 +16,7 @@ namespace ItemShop.Services
             var result = await _client.GetUserAsync(id);
             if (!result.IsSuccessful)
             {
-                throw new Exception("user not found");
+                throw new UserNotFoundException();
             }
             return result.Data;
         }

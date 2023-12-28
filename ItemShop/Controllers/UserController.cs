@@ -1,5 +1,4 @@
-﻿using ItemShop.Clients;
-using ItemShop.Models.DTOs.UserDtos;
+﻿using ItemShop.Models.DTOs.UserDtos;
 using ItemShop.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +8,6 @@ namespace ItemShop.Controllers
     [Route("user")]
     public class UserController : ControllerBase
     {
-        private readonly JsonPlaceholderClient _client;
         private readonly UserService _userService;
 
         public UserController(UserService userService)
