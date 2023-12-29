@@ -26,6 +26,8 @@ builder.Services.AddTransient<ItemService>();
 builder.Services.AddTransient<IItemRepository, ItemRepository>();
 builder.Services.AddTransient<IJsonPlaceholderClient, JsonPlaceholderClient>();
 builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<IShopRepository, ShopRepository>();
+builder.Services.AddTransient<ShopService>();
 
 builder.Services.AddHttpClient();
 

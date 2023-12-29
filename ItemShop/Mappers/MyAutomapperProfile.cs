@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ItemShop.Models.DTOs.ItemDtos;
+using ItemShop.Models.DTOs.ShopDtos;
 using ItemShop.Models.Entities;
 
 namespace ItemShop.Mappers
@@ -10,6 +11,7 @@ namespace ItemShop.Mappers
         {
             CreateMap<CreateItemDto, Item>().ReverseMap();
             CreateMap<UpdateItemDto, Item>().ReverseMap();
+            CreateMap<CreateShopDto, Shop>().ReverseMap();
         }
     }
 }

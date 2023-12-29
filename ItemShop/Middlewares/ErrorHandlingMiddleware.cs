@@ -36,6 +36,9 @@ namespace ItemShop.Middlewares
                     case UserNotFoundException e:
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
+                    case ShopNotFoundException e:
+                        response.StatusCode = (int)HttpStatusCode.NotFound;
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;

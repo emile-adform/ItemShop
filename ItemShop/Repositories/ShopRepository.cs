@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ItemShop.Repositories
 {
-    public class ShopRepository
+    public class ShopRepository : IShopRepository
     {
         private readonly DataContext _dataContext;
         public ShopRepository(DataContext dataContext)
