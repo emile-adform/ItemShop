@@ -15,7 +15,7 @@ namespace ItemShop.Controllers
         {
             _shopService = shopService;
         }
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await _shopService.Get(id));
@@ -37,7 +37,7 @@ namespace ItemShop.Controllers
             await _shopService.Update(shop);
             return Ok();
         }
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _shopService.Delete(id);

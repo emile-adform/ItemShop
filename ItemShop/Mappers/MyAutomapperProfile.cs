@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ItemShop.Models.DTOs.ItemDtos;
+using ItemShop.Models.DTOs.PurchaseDto;
 using ItemShop.Models.DTOs.ShopDtos;
 using ItemShop.Models.Entities;
 

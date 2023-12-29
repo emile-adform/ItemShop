@@ -13,7 +13,7 @@ namespace ItemShop.Controllers
         {
             _itemService = itemService;  
         }
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await _itemService.Get(id));
@@ -35,13 +35,13 @@ namespace ItemShop.Controllers
             await _itemService.Update(item);
             return Ok();
         }
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             await _itemService.Delete(id);
             return NoContent();
         }
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> AddToShop(int itemId, int shopId)
         {
             await _itemService.AddToShop(itemId, shopId);

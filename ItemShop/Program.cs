@@ -28,6 +28,8 @@ builder.Services.AddTransient<IJsonPlaceholderClient, JsonPlaceholderClient>();
 builder.Services.AddTransient<UserService>();
 builder.Services.AddTransient<IShopRepository, ShopRepository>();
 builder.Services.AddTransient<ShopService>();
+builder.Services.AddTransient<PurchaseRepository>();
+builder.Services.AddTransient<PurchaseService>();
 
 builder.Services.AddHttpClient();
 
