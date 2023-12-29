@@ -34,5 +34,6 @@ namespace ItemShop.Repositories
             _dataContext.Update(shop);
             await _dataContext.SaveChangesAsync();
         }
+
     }
 }

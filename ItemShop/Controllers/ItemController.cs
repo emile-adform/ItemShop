@@ -41,6 +41,12 @@ namespace ItemShop.Controllers
             await _itemService.Delete(id);
             return NoContent();
         }
+        [HttpPut("id")]
+        public async Task<IActionResult> AddToShop(int itemId, int shopId)
+        {
+            await _itemService.AddToShop(itemId, shopId);
+            return Ok();
+        }
 
     }
 }
