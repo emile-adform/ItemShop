@@ -1,5 +1,4 @@
-﻿using ItemShop.Models.DTOs.PurchaseDto;
-using ItemShop.Models.DTOs.UserDtos;
+﻿using ItemShop.Models.DTOs.UserDtos;
 using ItemShop.Services;
 using Microsoft.AspNetCore.Mvc;
 

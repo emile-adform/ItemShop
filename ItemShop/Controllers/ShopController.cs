@@ -1,6 +1,4 @@
-﻿using ItemShop.Models.DTOs.ItemDtos;
-using ItemShop.Models.DTOs.ShopDtos;
-using ItemShop.Models.Entities;
+﻿using ItemShop.Models.DTOs.ShopDtos;
 using ItemShop.Services;
 using Microsoft.AspNetCore.Mvc;
 
