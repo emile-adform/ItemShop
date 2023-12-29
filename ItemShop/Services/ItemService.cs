@@ -56,8 +56,7 @@ namespace ItemShop.Services
             {
                 throw new ItemNotFoundException();
             }
-            var entity = _mapper.Map<Item>(itemDto);
-            await _efItemRepository.Update(entity);
+            await _efItemRepository.Update(item);
         }
     }
 }

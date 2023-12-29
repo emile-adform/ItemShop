@@ -47,15 +47,14 @@ namespace ItemShop.Services
             return shop;
         }
 
-        public async Task Update(Shop shop)
+        public async Task Update(UpdateShopDto editShop)
         {
-            var item = await _shopRepository.Get(shop.Id);
-            if (item == null)
+            var shop = await _shopRepository.Get(editShop.Id);
+            if (shop == null)
             {
                 throw new ShopNotFoundException();
             }
-            var entity = _mapper.Map<Shop>(shop);
-            await _shopRepository.Update(entity);
+            await _shopRepository.Update(shop);
         }
     }
 }

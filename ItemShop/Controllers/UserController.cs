@@ -19,7 +19,7 @@ namespace ItemShop.Controllers
         {
             return Ok(await _userService.GetUsers());
         }
-        [HttpGet("{id}")]
+        [HttpGet("id")]
         public async Task<IActionResult> Get(int id)
         {
             return Ok(await _userService.GetById(id));

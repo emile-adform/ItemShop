@@ -32,7 +32,7 @@ namespace ItemShop.Controllers
             return Created();
         }
         [HttpPut]
-        public async Task<IActionResult> Put(Shop shop)
+        public async Task<IActionResult> Edit(UpdateShopDto shop)
         {
             await _shopService.Update(shop);
             return Ok();

@@ -12,6 +12,7 @@ namespace ItemShop.Mappers
             CreateMap<CreateItemDto, Item>().ReverseMap();
             CreateMap<UpdateItemDto, Item>().ReverseMap();
             CreateMap<CreateShopDto, Shop>().ReverseMap();
+            CreateMap<UpdateShopDto, Shop>().ReverseMap();
         }
     }
 }
